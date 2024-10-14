@@ -38,7 +38,7 @@ android {
     properties
   }
 
-  val path = properties["STORE_FILE"].toString() ?: ""
+  val path = properties["STORE_FILE"]?.toString() ?: ""
   val certificate = if (path.isNullOrEmpty()) {
     rootProject.file(" ")
   } else {
