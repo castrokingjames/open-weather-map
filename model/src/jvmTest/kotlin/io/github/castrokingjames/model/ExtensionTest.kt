@@ -20,12 +20,12 @@ import io.mockk.mockk
 import io.mockk.mockkStatic
 import io.mockk.unmockkAll
 import io.mockk.unmockkStatic
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import kotlin.test.assertEquals
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import java.text.SimpleDateFormat
 
 class ExtensionTest {
 
