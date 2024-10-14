@@ -1,0 +1,40 @@
+--
+-- WeatherTemperature
+--
+-- Usable by: Details/History
+-- Object Key: Surrogate (id)
+-- Member Type: Table
+-- Usage: Pivot/Association/Match
+--
+CREATE TABLE IF NOT EXISTS WeatherTemperature (
+  id INTEGER NOT NULL,
+  min REAL NOT NULL,
+  max REAL NOT NULL,
+  real REAL NOT NULL,
+  feels REAL NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (id) REFERENCES Weathers(id) ON DELETE CASCADE
+);
+
+--
+-- WeatherTemperatureIndices
+--
+-- Usable by: Details/History
+-- Member Type: Index
+-- Usage: Optimization
+--
+CREATE INDEX IF NOT EXISTS WeatherTemperatureIndices ON Weathers(id);
+
+selectByWeatherId:
+SELECT WeatherTemperature.* FROM WeatherTemperature
+WHERE WeatherTemperature.id = :weatherId;
+
+upsert:
+INSERT INTO WeatherTemperature
+VALUES ?
+ON CONFLICT(id) DO
+UPDATE SET 
+  min=excluded.min,
+  max=excluded.max,
+  real=excluded.real,
+  feels=excluded.feels;

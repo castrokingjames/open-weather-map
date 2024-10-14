@@ -1,0 +1,36 @@
+--
+-- WeatherIcon
+--
+-- Usable by: Details/History
+-- Object Key: Surrogate (id)
+-- Member Type: Table
+-- Usage: Pivot/Association/Match
+--
+CREATE TABLE IF NOT EXISTS WeatherIcon (
+  id INTEGER NOT NULL,
+  icon TEXT NOT NULL,
+  description TEXT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (id) REFERENCES Weathers(id) ON DELETE CASCADE
+);
+
+--
+-- WeatherIconIndices
+--
+-- Usable by: Details/History
+-- Member Type: Index
+-- Usage: Optimization
+--
+CREATE INDEX IF NOT EXISTS WeatherIconIndices ON Weathers(id);
+
+selectByWeatherId:
+SELECT WeatherIcon.* FROM WeatherIcon
+WHERE WeatherIcon.id = :weatherId;
+
+upsert:
+INSERT INTO WeatherIcon
+VALUES ?
+ON CONFLICT(id) DO
+UPDATE SET 
+  icon=excluded.icon,
+  description=excluded.description;

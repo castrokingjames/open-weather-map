@@ -1,0 +1,48 @@
+--
+-- Weathers
+--
+-- Usable by: Details/History
+-- Object Key: Surrogate (id)
+-- Member Type: Table
+-- Usage: Look-up/Reference
+--
+CREATE TABLE IF NOT EXISTS Weathers (
+  id INTEGER NOT NULL,
+  pressure REAL NOT NULL,
+  humidity REAL NOT NULL,
+  cloud REAL NOT NULL,
+  windSpeed REAL NOT NULL,
+  PRIMARY KEY (id)
+);
+
+--
+-- WeatherIndices
+--
+-- Usable by: Details/History
+-- Member Type: Index
+-- Usage: Optimization
+--
+CREATE INDEX IF NOT EXISTS WeatherIndices ON Weathers(id);
+
+selectLatest:
+SELECT Weathers.* FROM Weathers
+ORDER BY Weathers.id DESC
+LIMIT 1;
+
+selectAll:
+SELECT Weathers.* FROM Weathers
+ORDER BY Weathers.id DESC;
+
+selectByWeatherId:
+SELECT Weathers.* FROM Weathers
+WHERE Weathers.id = :weatherId;
+
+upsert:
+INSERT INTO Weathers
+VALUES ?
+ON CONFLICT(id) DO
+UPDATE SET 
+  pressure=excluded.pressure,
+  humidity=excluded.humidity, 
+  cloud=excluded.cloud, 
+  windSpeed=excluded.windSpeed;

@@ -1,0 +1,36 @@
+--
+-- WeatherArea
+--
+-- Usable by: Details/History
+-- Object Key: Surrogate (id)
+-- Member Type: Table
+-- Usage: Pivot/Association/Match
+--
+CREATE TABLE IF NOT EXISTS WeatherArea (
+  id INTEGER NOT NULL,
+  city TEXT NOT NULL,
+  country TEXT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (id) REFERENCES Weathers(id) ON DELETE CASCADE
+);
+
+--
+-- WeatherAreaIndices
+--
+-- Usable by: Details/History
+-- Member Type: Index
+-- Usage: Optimization
+--
+CREATE INDEX IF NOT EXISTS WeatherAreaIndices ON Weathers(id);
+
+selectByWeatherId:
+SELECT WeatherArea.* FROM WeatherArea
+WHERE WeatherArea.id = :weatherId;
+
+upsert:
+INSERT INTO WeatherArea
+VALUES ?
+ON CONFLICT(id) DO
+UPDATE SET 
+  city=excluded.city,
+  country=excluded.country;

@@ -1,0 +1,36 @@
+--
+-- WeatherTwilight
+--
+-- Usable by: Details/History
+-- Object Key: Surrogate (id)
+-- Member Type: Table
+-- Usage: Pivot/Association/Match
+--
+CREATE TABLE IF NOT EXISTS WeatherTwilight (
+  id INTEGER NOT NULL,
+  sunrise INTEGER NOT NULL,
+  sunset INTEGER NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (id) REFERENCES Weathers(id) ON DELETE CASCADE
+);
+
+--
+-- WeatherTwilightIndices
+--
+-- Usable by: Details/History
+-- Member Type: Index
+-- Usage: Optimization
+--
+CREATE INDEX IF NOT EXISTS WeatherTwilightIndices ON Weathers(id);
+
+selectByWeatherId:
+SELECT WeatherTwilight.* FROM WeatherTwilight
+WHERE WeatherTwilight.id = :weatherId;
+
+upsert:
+INSERT INTO WeatherTwilight
+VALUES ?
+ON CONFLICT(id) DO
+UPDATE SET 
+  sunrise=excluded.sunrise,
+  sunset=excluded.sunset;
