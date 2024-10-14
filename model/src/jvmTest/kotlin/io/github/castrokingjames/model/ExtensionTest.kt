@@ -19,41 +19,52 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
 import io.mockk.unmockkAll
+import io.mockk.unmockkStatic
 import java.util.Calendar
 import kotlin.test.assertEquals
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 
 class ExtensionTest {
 
+  @Before
+  fun setup() {
+    mockkStatic(Calendar::class)
+  }
+
+  @After
+  fun teardown() {
+    unmockkAll()
+  }
+
   @Test
   fun testWeatherIconOn6amReturnsSunIcon() {
-    mockkStatic(Calendar::class)
     every { Calendar.getInstance() } returns mockk {
       every { this@mockk.get(Calendar.HOUR_OF_DAY) } returns 6
     }
     val weather = generateWeather()
     val icon = weather.getIcon()
     assertEquals("https://openweathermap.org/img/wn/04d@4x.png", icon)
-    unmockkAll()
   }
 
   @Test
   fun testWeatherIconOn6pmReturnsMoonIcon() {
-    mockkStatic(Calendar::class)
     every { Calendar.getInstance() } returns mockk {
       every { this@mockk.get(Calendar.HOUR_OF_DAY) } returns 18
     }
     val weather = generateWeather()
     val icon = weather.getIcon()
     assertEquals("https://openweathermap.org/img/wn/04n@4x.png", icon)
-    unmockkAll()
   }
 
   @Test
   fun testDateFormat() {
+    unmockkStatic(Calendar::class)
     val now = 1728862580775
     val weather = generateWeather(now)
-    val text = weather.getDate()
-    assertEquals("October 14, 07:36", text)
+    val actual = weather.getDate()
+    var expected = "October 14, 07:36"
+    assertEquals(expected, actual, "$expected == $actual")
   }
 }

@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.castrokingjames.data.repository
 
 import app.cash.sqldelight.coroutines.asFlow
@@ -37,6 +39,7 @@ import io.github.castrokingjames.model.Weather
 import io.github.castrokingjames.repository.WeatherRepository
 import java.util.Locale
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.collectLatest
