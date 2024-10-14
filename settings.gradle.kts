@@ -26,6 +26,17 @@ dependencyResolutionManagement {
     }
 }
 
+plugins {
+    id("com.gradle.develocity") version "3.18.1"
+}
+
+develocity {
+    buildScan {
+        termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
+        termsOfUseAgree = "yes"
+    }
+}
+
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 // https://docs.gradle.org/7.6/userguide/configuration_cache.html#config_cache:stable
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
