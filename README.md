@@ -34,6 +34,32 @@ Go to the [Releases](https://github.com/castrokingjames/open-weather-map/release
   - [Navigation](https://arkivanov.github.io/Decompose/navigation/overview): Decompose navigation API
 - [Baseline Profiles](https://medium.com/proandroiddev/improve-your-android-app-performance-with-baseline-profiles-297f388082e6): Enhances app performance by including specifications of classes and methods in the APK that can be utilized by Android Runtime.
 
+## 💻 How to build the project?
+
+To build this project properly, you should follow the instructions below: 
+
+1. Go to the __[Open Weather Map login page](https://home.openweathermap.org/api_keys)__ and generate your API Keys.
+2. Add the key to the `local.properties` file like the following below:
+```gradle
+API_KEY=..
+```
+3. Also add the open weather map base url like the following below:
+```gradle
+BASE_URL=..
+```
+4. Your `local.properties` should look something like this:
+```gradle
+BASE_URL=https://api.openweathermap.org
+API_KEY=API-KEY-FROM-OPEN-WEATHER-MAP
+STORE_FILE=OPTIONAL-STORE-FIILE-PATH-FOR-SIGNING
+KEY_ALIAS=OPTIONAL-KEY-ALIAS-FOR-SIGNING
+KEY_PASSWORD=OPTIONAL-KEY-PASSWORD-FOR-SIGNING
+STORE_PASSWORD=OPTIONAL-STORE-PASSWORD-FOR-SIGNING
+
+```
+5. Build and run the project.
+
+   
 ## Architecture
 **Open Weather Map Compose** adheres to the MVVM architecture and implements the Repository pattern, aligning with [Google's official architecture guidance](https://developer.android.com/topic/architecture).
 
