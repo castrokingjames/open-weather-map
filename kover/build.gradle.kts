@@ -8,6 +8,7 @@ dependencies {
   kover(projects.data)
   kover(projects.datasource.remote)
   kover(projects.datasource.local)
+  kover(projects.feature.dashboard)
 }
 
 kover.reports {
