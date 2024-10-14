@@ -65,6 +65,7 @@ class ExtensionTest {
     val weather = generateWeather(now)
     val actual = weather.getDate()
     var expected = "October 14, 07:36"
+    println("Is Equal: ${expected == actual}")
     assertEquals(expected, actual, "$expected == $actual")
   }
 }
