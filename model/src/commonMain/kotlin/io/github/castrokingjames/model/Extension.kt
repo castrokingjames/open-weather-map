@@ -18,6 +18,8 @@ package io.github.castrokingjames.model
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 fun Weather.getIcon(): String {
   val calendar = Calendar.getInstance()
@@ -32,6 +34,8 @@ fun Weather.getIcon(): String {
 
 fun Weather.getDate(): String {
   val sdf = SimpleDateFormat("MMMM dd, hh:mm")
-  val date = Date(id)
+  val calendar = Calendar.getInstance()
+  calendar.timeInMillis = id
+  val date = calendar.time
   return sdf.format(date)
 }

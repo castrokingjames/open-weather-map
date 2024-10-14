@@ -25,6 +25,7 @@ import kotlin.test.assertEquals
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import java.text.SimpleDateFormat
 
 class ExtensionTest {
 
@@ -61,10 +62,12 @@ class ExtensionTest {
   @Test
   fun testDateFormat() {
     unmockkStatic(Calendar::class)
-    val now = 1728862580775
-    val weather = generateWeather(now)
+    val formatter = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+    val date = formatter.parse("14-10-2024 15:30:00")
+    val millis = date.time
+    val weather = generateWeather(millis)
     val actual = weather.getDate()
-    var expected = "October 14, 07:36"
+    var expected = "October 14, 03:30"
     assertEquals(expected, actual, "$expected == $actual")
   }
 }
